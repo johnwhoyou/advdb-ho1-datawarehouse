@@ -1,0 +1,47 @@
+services:
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"
+    networks:
+      - HO1-network
+    ports:
+      - 8888:3306
+    volumes:
+      - stadvdb-ho1-mysql:/var/lib/mysql
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: "1234"
+    networks:
+      - HO1-network
+    ports:
+      - 27017:27017
+    volumes:
+      - stadvdb-ho1-mongo:/data/db
+
+  apache-nifi:
+    image: apache/nifi:latest
+    restart: always
+    networks:
+      - HO1-network
+    ports:
+      - 8443:8443
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=root
+      - SINGLE_USER_CREDENTIALS_PASSWORD=root12345678
+    volumes:
+      - stadvdb-ho1-nifi:/opt/nifi
+
+networks:
+  HO1-network:
+
+volumes:
+  stadvdb-ho1-mysql:
+  stadvdb-ho1-mongo:
+  stadvdb-ho1-nifi:
