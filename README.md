@@ -7,6 +7,10 @@ The data sources are: GOSales database (MySQL), Employee database (MySQL), Compl
 
 ## To Get Started
 NOTE: You must have Docker installed already.
+
+UPDATE: Our team has developed a setup script to automate steps 1-10.
+Run the `setup.sh` file in the terminal using the command `./setup` note that the terminal should be in the current directory.
+
 1. Download the files or clone the repository.
 2. In the root directory of the folder where the `docker-compose.yml` exists, run the command `docker compose up -d` in the terminal.
 This will take some time as all the required image files of Apache NiFi, MySQL Server, and MongoDB Server will be downloaded and installed to your machine.
